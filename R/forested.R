@@ -1,4 +1,4 @@
-#' Forest Attributes in Washington State
+#' Forest Attributes in the U.S.
 #'
 #' @description
 #' The U.S. Department of Agriculture, Forest Service, Forest Inventory and
@@ -7,14 +7,14 @@
 #' management. The FIA uses a set of criteria to classify a plot of land as
 #' "forested" or "non-forested," and that classification is a central data
 #' point in many decision-making contexts. A small subset of plots in
-#' Washington State are sampled and assessed "on-the-ground" as forested or
+#' the U.S. are sampled and assessed "on-the-ground" as forested or
 #' non-forested, but the FIA has access to remotely sensed data for all land
-#' in the state. Practitioners can develop a model on the more easily-accessible
+#' in the country. Practitioners can develop a model on the more easily-accessible
 #' remotely sensed data to predict whether a plot is forested or non-forested.
 #'
 #' @format
 #'
-#' A data frame with 7,107 rows and 19 columns:
+#' A data frame with:
 #'
 #' \describe{
 #'   \item{forested}{Whether the plot is classified as "forested" or not,
@@ -29,16 +29,16 @@
 #'   \item{tree_no_tree}{LANDFIRE tree/non-tree lifeform mask, as a factor
 #'     with levels `"Tree"` and `"No tree"`.}
 #'   \item{dew_temp}{Mean annual dewpoint temperature (1991-2020), in degrees
-#'     Celcius.}
+#'     Celsius.}
 #'   \item{precip_annual}{Mean annual precipitation (1991-2020), in mm × 100.}
 #'   \item{temp_annual_mean}{Mean annual temperature (1991-2020), in degrees
-#'     Celcius.}
+#'     Celsius.}
 #'   \item{temp_annual_min}{Mean annual minimum temperature (1991-2020), in
-#'     degrees Celcius.}
+#'     degrees Celsius.}
 #'   \item{temp_annual_max}{Mean annual maximum temperature (1991-2020), in
-#'     degrees Celcius.}
+#'     degrees Celsius.}
 #'   \item{temp_january_min}{Mean minimum temperature in January (1991-2020), in
-#'     degrees Celcius.}
+#'     degrees Celsius.}
 #'   \item{vapor_min, vapor_max}{Minimum and maximum annual vapor pressure
 #'     deficit (1991-2020), in Pa x 100.}
 #'   \item{canopy_cover}{Analytical Tree Canopy Cover, as a percent.}
@@ -47,7 +47,22 @@
 #'   \item{land_type}{Land cover type from European Space Agency (ESA) 2020
 #'     WorldCover global land cover product, as a factor with levels
 #'     `"Tree"`, `"Non-tree vegetation"`, and `"Barren"`.}
+#'   \item{county}{The county in the state, as a factor.}
 #' }
+#'
+#' The number of rows varies by state. Washington has `r nrow(forested_wa)` rows,
+#' Georgia has `r nrow(forested_ga)`.
+#'
+#' The Georgia data has one less column than the Washington data as its
+#' `northness` column has been omitted due to issues with the source raster.
+#'
+#' @section Data by state:
+#'
+#' The forested package provides a few data sets, each corresponding to forest
+#' data in one state:
+#'
+#' * `forested` corresponds to **Washington** state and is aliased as `forested_wa`.
+#' * `forested_ga` corresponds to **Georgia**.
 #'
 #' @source
 #' _For more information on the source data, see Table 1 in:_
@@ -73,10 +88,21 @@
 #' White, Grayson W. (2023). FIESTA: A forest inventory estimation and analysis
 #' R package. Ecography 2023: e06428 (ver. 1.0).
 #'
+#' @name forested
+#' @aliases forested_wa
 #' @examples
-#'
+#' # Washington data:
 #' str(forested)
-#'
 #' head(forested)
+#' all.equal(forested, forested_wa)
 #'
+#' # Georgia data:
+#' str(forested_ga)
+#' head(forested_ga)
 "forested"
+
+#' @rdname forested
+"forested_wa"
+
+#' @rdname forested
+"forested_ga"
